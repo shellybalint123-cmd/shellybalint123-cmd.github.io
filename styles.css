@@ -108,10 +108,69 @@ h2 {
   color: var(--color-text);
 }
 
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
+}
+
 .hero-tagline {
   font-size: clamp(1.1rem, 2.5vw, 1.5rem);
   color: var(--color-accent-dark);
   margin-bottom: 32px;
+}
+
+/* Stats / Results */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .stats-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 900;
+  color: var(--color-accent);
+}
+
+.stat-label {
+  display: block;
+  margin-top: 4px;
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+.reel-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 48px;
+}
+
+.reel-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.reel-number {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--color-accent-dark);
 }
 
 .btn {
