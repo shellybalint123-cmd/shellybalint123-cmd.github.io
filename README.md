@@ -1,13 +1,20 @@
-# אתר שלי בלינט
+# אתר SBMEDIA - שלי באלינט
 
 אתר תדמית אישי — HTML/CSS/JS פשוט, בלי build tools. מתפרסם ישירות ל-GitHub Pages.
 
-## איך להחליף תמונות בגלריה
-כרגע התאים ב"תיק עבודות" הם placeholder-ים צבעוניים (ב-`index.html`, בתוך `.gallery-grid`).
-כדי להחליף אותם בתמונות אמיתיות:
+## איך להוסיף את סרטוני הפורטפוליו
+בסקשן "תיק עבודות" יש 6 כרטיסי וידאו מוכנים מראש (ב-`index.html`, בתוך `.video-grid`).
+כל כרטיס כבר מוגדר עם `<video>` שמצפה לקובץ בשם קבוע בתיקייה `assets/videos/`:
 
-1. שימי את קבצי התמונות בתיקייה `assets/gallery/`.
-2. בכל `<div class="gallery-item">` — החליפי את התוכן ב-`<img src="assets/gallery/שם-הקובץ.jpg" alt="תיאור העבודה">`.
+- `assets/videos/car-planet.mp4`
+- `assets/videos/goya.mp4`
+- `assets/videos/platinum.mp4`
+- `assets/videos/beauty.mp4`
+- `assets/videos/wedding.mp4`
+- `assets/videos/creative.mp4`
+
+פשוט שימי קובץ MP4 בשם המתאים בתיקייה הזו — האתר יעבוד מיד, בלי לגעת בקוד.
+עד שהקובץ לא קיים, הכרטיס מציג placeholder זהוב-כחול אלגנטי עם כפתור play.
 
 ## איך להריץ מקומית
 פשוט לפתוח את `index.html` בדפדפן, או להריץ שרת סטטי מקומי (למשל `npx serve .`).

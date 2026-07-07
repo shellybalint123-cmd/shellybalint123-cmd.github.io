@@ -7,14 +7,14 @@
 <meta name="description" content="SBMEDIA - שלי באלינט - בניית וניהול נוכחות דיגיטלית לעסקים: סושיאל, צילום, אסטרטגיית תוכן, עריכת וידאו וקמפיינים.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="#top" class="logo">SBMEDIA</a>
+    <a href="#top" class="logo"><img src="assets/logo-mark.png" alt="SBMEDIA" class="logo-img"></a>
     <button class="nav-toggle" aria-label="פתיחת תפריט" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -23,6 +23,7 @@
       <a href="#services">שירותים</a>
       <a href="#gallery">עבודות</a>
       <a href="#results">תוצאות</a>
+      <a href="#campaigns">קמפיינים</a>
       <a href="#contact">צור קשר</a>
     </nav>
   </div>
@@ -32,8 +33,7 @@
 
   <section id="top" class="hero">
     <div class="container">
-      <h1>SBMEDIA</h1>
-      <p class="hero-subtitle">שלי באלינט</p>
+      <img src="assets/logo-full.png" alt="SBMEDIA - שלי באלינט" class="hero-logo">
       <p class="hero-tagline">נראות דיגיטלית היא לא רק עיצוב, היא אסטרטגיה.</p>
       <a href="#contact" class="btn btn-primary">בואו נדבר</a>
     </div>
@@ -42,14 +42,50 @@
   <section id="gallery" class="section section-alt">
     <div class="container">
       <h2>תיק עבודות</h2>
-      <p class="section-lead">מבחר מהעבודות שלי — יעודכן בקרוב בתמונות אמיתיות.</p>
-      <div class="gallery-grid">
-        <div class="gallery-item" data-placeholder="1"><span>עבודה 1</span></div>
-        <div class="gallery-item" data-placeholder="2"><span>עבודה 2</span></div>
-        <div class="gallery-item" data-placeholder="3"><span>עבודה 3</span></div>
-        <div class="gallery-item" data-placeholder="4"><span>עבודה 4</span></div>
-        <div class="gallery-item" data-placeholder="5"><span>עבודה 5</span></div>
-        <div class="gallery-item" data-placeholder="6"><span>עבודה 6</span></div>
+      <p class="section-lead">מבחר מסרטוני פורטפוליו אמיתיים מעבודות עם לקוחות.</p>
+      <div class="video-grid">
+        <div class="video-card">
+          <video class="video-el" preload="none" playsinline>
+            <source src="assets/videos/car-planet.mp4" type="video/mp4">
+          </video>
+          <div class="video-placeholder"><span class="play-icon">&#9658;</span></div>
+          <span class="video-caption">סוכנות רכב</span>
+        </div>
+        <div class="video-card">
+          <video class="video-el" preload="none" playsinline>
+            <source src="assets/videos/goya.mp4" type="video/mp4">
+          </video>
+          <div class="video-placeholder"><span class="play-icon">&#9658;</span></div>
+          <span class="video-caption">גויה</span>
+        </div>
+        <div class="video-card">
+          <video class="video-el" preload="none" playsinline>
+            <source src="assets/videos/platinum.mp4" type="video/mp4">
+          </video>
+          <div class="video-placeholder"><span class="play-icon">&#9658;</span></div>
+          <span class="video-caption">פלטינום</span>
+        </div>
+        <div class="video-card">
+          <video class="video-el" preload="none" playsinline>
+            <source src="assets/videos/beauty.mp4" type="video/mp4">
+          </video>
+          <div class="video-placeholder"><span class="play-icon">&#9658;</span></div>
+          <span class="video-caption">יופי וקוסמטיקה</span>
+        </div>
+        <div class="video-card">
+          <video class="video-el" preload="none" playsinline>
+            <source src="assets/videos/wedding.mp4" type="video/mp4">
+          </video>
+          <div class="video-placeholder"><span class="play-icon">&#9658;</span></div>
+          <span class="video-caption">חתונה</span>
+        </div>
+        <div class="video-card">
+          <video class="video-el" preload="none" playsinline>
+            <source src="assets/videos/creative.mp4" type="video/mp4">
+          </video>
+          <div class="video-placeholder"><span class="play-icon">&#9658;</span></div>
+          <span class="video-caption">Creative Direction</span>
+        </div>
       </div>
     </div>
   </section>
@@ -108,10 +144,19 @@
         <div class="reel-stat"><span class="reel-number">90.5K</span><span>צפיות ברילס</span></div>
         <div class="reel-stat"><span class="reel-number">308K</span><span>צפיות ברילס</span></div>
       </div>
+      <img src="assets/portfolio/results.jpg" alt="נתונים ותוצאות מאינסטגרם" class="screenshot-img">
     </div>
   </section>
 
-  <section id="services" class="section section-alt">
+  <section id="campaigns" class="section section-alt">
+    <div class="container">
+      <h2>קמפיינים ממומנים</h2>
+      <p class="section-lead">ניהול קמפיינים ממוקדים ב-Meta עם מעקב ביצועים מלא.</p>
+      <img src="assets/portfolio/campaigns.jpg" alt="נתוני קמפיינים ממומנים ב-Meta" class="screenshot-img">
+    </div>
+  </section>
+
+  <section id="services" class="section">
     <div class="container">
       <h2>שירותים שלי</h2>
       <p class="section-lead">מה כלול בתהליך — תהליך מדויק ומותאם אישית שמביא תוצאות ומייצר נוכחות דיגיטלית שמרגישה כמו מותג.</p>
@@ -156,9 +201,8 @@
       <h2>צור קשר</h2>
       <p class="section-lead">מוכנה להפוך את הנוכחות הדיגיטלית שלכם למערכת ברורה, עקבית ומבדלת.</p>
       <div class="contact-links">
-        <a href="mailto:shellybalint123@gmail.com" class="btn btn-primary">shellybalint123@gmail.com</a>
-        <a href="tel:0506657822" class="btn btn-outline">050-665-7822</a>
-        <a href="https://instagram.com/shelly_balint" target="_blank" rel="noopener" class="btn btn-outline">@shelly_balint</a>
+        <a href="mailto:shellybalint123@gmail.com" class="btn btn-primary">&#9993; shellybalint123@gmail.com</a>
+        <a href="tel:0506657822" class="btn btn-outline">&#9742; 050-665-7822</a>
       </div>
     </div>
   </section>

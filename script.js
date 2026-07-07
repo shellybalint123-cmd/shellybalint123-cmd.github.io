@@ -14,3 +14,24 @@ mainNav.querySelectorAll('a').forEach(link => {
     navToggle.setAttribute('aria-expanded', 'false');
   });
 });
+
+document.querySelectorAll('.video-card').forEach(card => {
+  const video = card.querySelector('video');
+
+  card.addEventListener('click', () => {
+    if (video.paused) {
+      video.controls = true;
+      video.play()
+        .then(() => card.classList.add('is-playing'))
+        .catch(() => {});
+    } else {
+      video.pause();
+    }
+  });
+
+  video.addEventListener('pause', () => card.classList.remove('is-playing'));
+  video.addEventListener('ended', () => {
+    card.classList.remove('is-playing');
+    video.controls = false;
+  });
+});
