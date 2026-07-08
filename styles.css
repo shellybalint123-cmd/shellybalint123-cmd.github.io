@@ -317,6 +317,7 @@ h2 {
 }
 
 .video-card {
+  background: var(--color-navy);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(13, 17, 48, 0.18);
@@ -329,6 +330,7 @@ h2 {
 }
 
 .video-el {
+  background: var(--color-navy);
   display: block;
   width: 100%;
   height: auto;
@@ -344,6 +346,7 @@ h2 {
 }
 
 .video-el-bare {
+  background: var(--color-navy);
   width: 100%;
   height: auto;
   display: block;
