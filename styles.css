@@ -343,8 +343,10 @@ h2 {
   margin: 0;
 }
 
-.video-grid-narrow {
-  max-width: 360px;
+.video-el-bare {
+  width: 100%;
+  height: auto;
+  display: block;
   margin: 0 auto 56px;
 }
 
@@ -352,6 +354,14 @@ h2 {
   text-align: center;
   font-size: 1.2rem;
   color: var(--color-cream-text);
+  margin-bottom: 24px;
+}
+
+.more-work-img {
+  width: 100%;
+  height: auto;
+  margin: 0 auto 56px;
+  border-radius: 8px;
 }
 
 /* About */
