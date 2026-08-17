@@ -25,6 +25,30 @@ function enableVideoSound(video) {
 document.querySelectorAll('video').forEach(video => {
   enableVideoSound(video);
 
+  const soundButton = document.createElement('button');
+  soundButton.className = 'video-sound-button';
+  soundButton.type = 'button';
+  soundButton.textContent = 'הפעל סאונד';
+  soundButton.setAttribute('aria-label', 'הפעלת הסרטון עם סאונד');
+
+  const videoParent = video.parentElement;
+  if (videoParent && !videoParent.querySelector('.video-sound-button')) {
+    videoParent.appendChild(soundButton);
+  }
+
+  soundButton.addEventListener('click', async event => {
+    event.preventDefault();
+    event.stopPropagation();
+    enableVideoSound(video);
+
+    try {
+      await video.play();
+      soundButton.classList.add('is-hidden');
+    } catch (error) {
+      soundButton.classList.remove('is-hidden');
+    }
+  });
+
   ['click', 'pointerdown', 'touchstart', 'loadedmetadata', 'canplay'].forEach(eventName => {
     video.addEventListener(eventName, () => enableVideoSound(video), { passive: true });
   });
@@ -37,11 +61,16 @@ document.querySelectorAll('video').forEach(video => {
 
   video.addEventListener('play', () => {
     enableVideoSound(video);
+    soundButton.classList.add('is-hidden');
 
     document.querySelectorAll('video').forEach(otherVideo => {
       if (otherVideo !== video) {
         otherVideo.pause();
       }
     });
+  });
+
+  video.addEventListener('pause', () => {
+    soundButton.classList.remove('is-hidden');
   });
 });
