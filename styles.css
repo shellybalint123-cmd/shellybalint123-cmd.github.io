@@ -330,7 +330,6 @@ h2 {
 }
 
 .video-card {
-  position: relative;
   background: var(--color-navy);
   border-radius: 16px;
   overflow: hidden;
@@ -338,32 +337,6 @@ h2 {
   transition: transform 0.3s ease;
   line-height: 0;
   min-width: 0;
-}
-
-.video-sound-button {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  z-index: 2;
-  border: 1px solid rgba(250, 248, 243, 0.75);
-  background: rgba(13, 17, 48, 0.86);
-  color: var(--color-white);
-  font: 700 0.85rem var(--font-main);
-  line-height: 1;
-  padding: 9px 12px;
-  border-radius: 999px;
-  cursor: pointer;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
-}
-
-.video-sound-button:hover,
-.video-sound-button:focus-visible {
-  background: rgba(23, 27, 77, 0.96);
-}
-
-.video-sound-button.is-hidden {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .video-card:hover {
