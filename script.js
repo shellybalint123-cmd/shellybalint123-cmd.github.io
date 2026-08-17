@@ -15,13 +15,28 @@ mainNav.querySelectorAll('a').forEach(link => {
   });
 });
 
-document.querySelectorAll('video').forEach(video => {
+function enableVideoSound(video) {
+  video.removeAttribute('muted');
+  video.defaultMuted = false;
   video.muted = false;
   video.volume = 1;
+}
+
+document.querySelectorAll('video').forEach(video => {
+  enableVideoSound(video);
+
+  ['click', 'pointerdown', 'touchstart', 'loadedmetadata', 'canplay'].forEach(eventName => {
+    video.addEventListener(eventName, () => enableVideoSound(video), { passive: true });
+  });
+
+  video.addEventListener('volumechange', () => {
+    if (video.muted || video.volume === 0) {
+      enableVideoSound(video);
+    }
+  });
 
   video.addEventListener('play', () => {
-    video.muted = false;
-    video.volume = 1;
+    enableVideoSound(video);
 
     document.querySelectorAll('video').forEach(otherVideo => {
       if (otherVideo !== video) {
