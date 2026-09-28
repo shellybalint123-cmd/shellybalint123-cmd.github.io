@@ -948,7 +948,7 @@ p { margin: 0 0 1em; }
   gap: 20px;
 }
 
-@media (min-width: 900px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 700px) { .testimonials-grid { grid-template-columns: repeat(2, 1fr); } }
 
 .testimonial {
   margin: 0;
