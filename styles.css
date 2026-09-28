@@ -179,16 +179,16 @@ p { margin: 0 0 1em; }
   padding: 0 14px 0 14px;
   padding-inline-start: 22px;
   border-radius: 999px;
-  background: rgba(250, 247, 242, 0.6);
+  background: #111010;
   -webkit-backdrop-filter: blur(18px) saturate(160%);
   backdrop-filter: blur(18px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 10px 30px -14px rgba(31, 29, 27, 0.2);
   transition: background 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
 .site-header.is-scrolled .header-bar {
-  background: rgba(250, 247, 242, 0.78);
+  background: #111010;
   box-shadow: 0 14px 40px -16px rgba(31, 29, 27, 0.28);
 }
 
@@ -203,7 +203,7 @@ p { margin: 0 0 1em; }
 
 .main-nav a {
   position: relative;
-  color: var(--ink);
+  color: #f3eee6;
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 400;
@@ -230,15 +230,15 @@ p { margin: 0 0 1em; }
   height: 44px;
   padding: 0 22px;
   border-radius: 999px;
-  background: var(--ink);
-  color: var(--bg);
+  background: #faf7f2;
+  color: var(--ink);
   font-size: 0.92rem;
   font-weight: 500;
   text-decoration: none;
   transition: background 0.3s var(--ease);
 }
 
-.header-cta:hover { background: var(--accent-deep); }
+.header-cta:hover { background: var(--accent); color: #fff; }
 
 .nav-toggle {
   display: none;
@@ -257,7 +257,7 @@ p { margin: 0 0 1em; }
 .nav-toggle span {
   width: 20px;
   height: 1.5px;
-  background: var(--ink);
+  background: #f3eee6;
   transition: transform 0.3s var(--ease);
 }
 
@@ -1168,10 +1168,10 @@ p { margin: 0 0 1em; }
     padding: 10px;
     margin: 0;
     border-radius: 24px;
-    background: rgba(250, 247, 242, 0.97);
+    background: #111010;
     -webkit-backdrop-filter: blur(18px) saturate(160%);
     backdrop-filter: blur(18px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: var(--shadow);
     opacity: 0;
     visibility: hidden;
@@ -1188,7 +1188,7 @@ p { margin: 0 0 1em; }
   }
 
   .main-nav a::after { display: none; }
-  .main-nav a:hover { background: rgba(31, 29, 27, 0.04); }
+  .main-nav a:hover { background: rgba(255, 255, 255, 0.06); }
 
   .header-bar { position: relative; gap: 10px; }
   .header-cta { margin-inline-start: auto; }
