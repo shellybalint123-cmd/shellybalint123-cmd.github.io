@@ -846,7 +846,57 @@ p { margin: 0 0 1em; }
   margin-bottom: 12px;
 }
 
-.testimonial figcaption { font-size: 0.92rem; color: var(--ink-2); }
+.testimonial {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.testimonial figcaption { font-size: 0.92rem; color: var(--ink-3); }
+
+.testimonial-audio {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .testimonial-audio { grid-template-columns: 0.7fr 1.3fr; gap: 40px; }
+}
+
+.audio-head { display: flex; align-items: center; gap: 16px; }
+
+.audio-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+
+.audio-icon svg { width: 26px; height: 26px; }
+
+.audio-list { display: grid; gap: 12px; }
+
+.audio-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.audio-label {
+  flex: none;
+  font-size: 0.85rem;
+  color: var(--ink-2);
+  min-width: 64px;
+}
+
+.audio-item audio { width: 100%; height: 44px; min-width: 0; }
 .testimonial figcaption strong { display: block; color: var(--ink); font-weight: 500; }
 
 /* ---------- More work ---------- */
@@ -1042,4 +1092,5 @@ p { margin: 0 0 1em; }
   .hero-trust { font-size: 0.82rem; }
   .contact-links { flex-direction: column; gap: 6px; }
   .contact-sep { display: none; }
+  .audio-item { flex-direction: column; align-items: stretch; gap: 6px; }
 }
