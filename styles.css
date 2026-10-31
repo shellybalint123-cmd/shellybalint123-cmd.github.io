@@ -155,7 +155,7 @@ ul, ol { list-style: none; }
 }
 .sec-idx span { font-weight: 700; color: var(--accent-deep); }
 .sec-idx::before { content: none; }
-.sec-head h2, .design-head h3 { font-size: clamp(2rem, 4.8vw, 3.75rem); font-weight: 700; letter-spacing: -0.02em; }
+.sec-head h2 { font-size: clamp(2rem, 4.8vw, 3.75rem); font-weight: 700; letter-spacing: -0.02em; }
 .sec-lead { margin: 18px 0 0; max-width: 560px; color: var(--ink-2); font-weight: 300; font-size: 1.125rem; }
 
 /* ---------- Hero ---------- */
@@ -273,14 +273,6 @@ ul, ol { list-style: none; }
 .btn-more svg { width: 18px; height: 18px; transition: transform 0.35s var(--ease); }
 .btn-more:hover { background: var(--ink); color: var(--bg); }
 .btn-more[aria-expanded="true"] svg { transform: rotate(180deg); }
-
-.design-block { margin-top: clamp(72px, 9vw, 120px); padding-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line); }
-.design-head { margin-bottom: 32px; }
-.design-head h3 { font-size: clamp(1.6rem, 3.2vw, 2.4rem); }
-.design-item { max-width: 980px; margin: 0 auto clamp(32px, 4vw, 48px); }
-.design-item:last-child { margin-bottom: 0; }
-.design-item figcaption { margin-bottom: 14px; font-weight: 500; font-size: 1.05rem; }
-.design-item img { width: 100%; border-radius: 4px; }
 
 /* ---------- Results ---------- */
 .results { background: var(--navy); color: #fff; }
