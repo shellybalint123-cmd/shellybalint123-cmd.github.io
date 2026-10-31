@@ -217,7 +217,7 @@ ul, ol { list-style: none; }
   transition: background-color 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
 }
 .tab-num { display: none; }
-.tab-count { font-size: 0.78rem; opacity: 0.7; }
+.tab-count { font-size: 0.78rem; }
 .tab:hover { border-color: var(--navy); color: var(--ink); }
 .tab[aria-selected="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
 
@@ -233,6 +233,13 @@ ul, ol { list-style: none; }
 .vgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .vitem { min-width: 0; }
 .vitem.is-wide { grid-column: span 2; }
+
+/* "All work" view keeps the original 3-per-row gallery order */
+.vgrid.vgrid-all { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.vgrid-all .vitem.is-wide { grid-column: 1 / -1; }
+.vgrid-all .vplay { width: 40px; height: 40px; margin: -20px 0 0 -20px; }
+.vgrid-all .vplay svg { width: 16px; height: 16px; }
+.vgrid-all .vnum { bottom: 6px; inset-inline-start: 6px; padding: 2px 7px; font-size: 0.65rem; }
 .is-collapsed [data-extra] { display: none; }
 
 .vcard {
@@ -439,6 +446,10 @@ html.lb-open { overflow: hidden; }
 /* ---------- Tablet & up ---------- */
 @media (min-width: 700px) {
   .vgrid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .vgrid.vgrid-all { gap: 16px; }
+  .vgrid-all .vplay { width: 56px; height: 56px; margin: -28px 0 0 -28px; }
+  .vgrid-all .vplay svg { width: 22px; height: 22px; }
+  .vgrid-all .vnum { bottom: 10px; inset-inline-start: 10px; padding: 3px 9px; font-size: 0.72rem; }
   .stat-row { grid-template-columns: repeat(4, 1fr); }
   .stat-row-reels { grid-template-columns: repeat(3, 1fr); max-width: 760px; }
   .quotes { grid-template-columns: repeat(2, 1fr); }
