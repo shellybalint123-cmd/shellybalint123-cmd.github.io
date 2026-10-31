@@ -1,28 +1,51 @@
-# אתר SBMEDIA - שלי באלינט
+# SB MEDIA - שלי באלינט
 
-אתר תדמית אישי — HTML/CSS/JS פשוט, בלי build tools. מתפרסם ישירות ל-GitHub Pages.
+אתר תיק עבודות סטטי (HTML / CSS / JS ללא build), מתפרסם ישירות מ-GitHub Pages.
 
-## איך להוסיף את סרטוני הפורטפוליו
-בסקשן "תיק עבודות" יש 6 כרטיסי וידאו מוכנים מראש (ב-`index.html`, בתוך `.video-grid`).
-כל כרטיס כבר מוגדר עם `<video>` שמצפה לקובץ בשם קבוע בתיקייה `assets/videos/`:
+## מבנה האתר
+סדר המקטעים ב-`index.html`:
 
-- `assets/videos/car-planet.mp4`
-- `assets/videos/goya.mp4`
-- `assets/videos/platinum.mp4`
-- `assets/videos/beauty.mp4`
-- `assets/videos/wedding.mp4`
-- `assets/videos/creative.mp4`
+1. **Hero** (`#top`) - כותרת, כפתורים ואזור Showreel
+2. **עבודות נבחרות** (`#work`) - פרויקטים לפי תחום, ובתחתית "עיצוב וקופירייטינג"
+3. **תוצאות** (`#results`) - שני Case Studies + "נתוני ביצועים נוספים" (נפתח בלחיצה)
+4. **שירותים** (`#services`)
+5. **אודות** (`#about`)
+6. **המלצות** (`#testimonials`)
+7. **צור קשר** (`#contact`)
 
-פשוט שימי קובץ MP4 בשם המתאים בתיקייה הזו — האתר יעבוד מיד, בלי לגעת בקוד.
-עד שהקובץ לא קיים, הכרטיס מציג placeholder זהוב-כחול אלגנטי עם כפתור play.
+צבע המותג: `#080E3D` (משתנה `--navy` בראש `styles.css`).
 
-## איך להריץ מקומית
-פשוט לפתוח את `index.html` בדפדפן, או להריץ שרת סטטי מקומי (למשל `npx serve .`).
+## איך מוסיפים סרטון לפרויקט
+1. מעלים את הסרטון ל-`public/videos/` (MP4, H.264, מומלץ 720p אנכי).
+2. שומרים תמונת תצוגה (480px רוחב) ב-`public/videos/thumbs/` באותו שם (למשל `my-video.jpg`).
+3. ב-`index.html`, בתוך הפרויקט המתאים (`<ul class="vgrid">`), מעתיקים בלוק `<li class="vitem" data-item>` קיים ומחליפים את שם הקובץ ב-`data-video`, `data-thumb` ובתמונה.
+4. ארבעת הסרטונים הראשונים בכל פרויקט מוצגים מיד. סרטונים נוספים צריכים את `data-extra` ב-`<li>` והם נחשפים בכפתור "הצגת כל ה...".
 
-## איך לפרסם עדכונים
+הסרטונים לא נטענים עד שמשתמש לוחץ עליהם (נפתחים בחלון צפייה עם סאונד, ומעבר בין סרטונים בחצים).
+
+## Showreel
+באזור הפתיחה יש מקום מוכן ל-Showreel. כדי להפעיל אותו, מעלים סרטון (למשל `public/videos/showreel.mp4`) ובקובץ `index.html` ממלאים את `data-src`:
+
+```html
+<div class="showreel" id="showreel" data-src="public/videos/showreel.mp4" ...>
+```
+
+עד אז מוצג פס תמונות מהעבודות עם התווית "בקרוב".
+
+## תצוגת קישור בוואטסאפ
+תג ה-Open Graph (כותרת, תיאור ותמונה) נמצא בראש `index.html`, והתמונה היא `assets/og-image.jpg` (1200x630).
+הכתובת המלאה בתגים (`og:url`, `og:image`) מוגדרת לפי כתובת האתר הנוכחית. אם הכתובת משתנה, יש לעדכן אותה.
+
+## הרצה מקומית
+```
+python3 -m http.server 8000
+```
+ואז לפתוח `http://localhost:8000`.
+
+## פרסום עדכונים
 ```
 git add .
 git commit -m "עדכון תוכן"
 git push
 ```
-GitHub Pages יתעדכן אוטומטית תוך דקה-שתיים.
+GitHub Pages מתעדכן אוטומטית תוך דקה-שתיים.
