@@ -30,7 +30,7 @@
 <link rel="preload" href="assets/fonts/heebo-400-hebrew.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/heebo-800-hebrew.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/syne-700-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=20261101-studio">
+<link rel="stylesheet" href="styles.css?v=20261101-player">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -861,10 +861,24 @@
   </a>
 </aside>
 
-<dialog class="lb" id="lightbox" aria-label="נגן וידאו">
+<dialog class="lb" id="lightbox" aria-label="נגן וידאו" aria-modal="true">
   <div class="lb-inner">
-    <button class="lb-close" type="button" aria-label="סגירה"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></button>
-    <div class="lb-stage"><video id="lb-video" controls playsinline preload="auto"></video></div>
+    <button class="lb-close" type="button" aria-label="סגירה וחזרה לגלריה"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg><span>סגירה</span></button>
+    <div class="lb-tools">
+      <button class="lb-mute" type="button" aria-label="השתקה" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path class="w" d="M16 9a4 4 0 010 6M18.5 6.5a8 8 0 010 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path class="x" d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+      <button class="lb-full" type="button" aria-label="מסך מלא"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <div class="lb-stage">
+      <video id="lb-video" controls playsinline webkit-playsinline preload="auto" controlslist="nodownload noremoteplayback"></video>
+      <span class="lb-spinner" hidden aria-hidden="true"></span>
+      <div class="lb-overlay" hidden>
+        <button class="lb-overlay-btn" type="button" aria-label="הפעלה">
+          <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+          <svg class="i-replay" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 102.4-5.5M4.5 4.5V9H9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="lb-overlay-msg" role="status"></p>
+      </div>
+    </div>
     <div class="lb-bar">
       <button class="lb-prev" type="button" aria-label="הסרטון הקודם"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <p class="lb-count" aria-live="polite"><span class="lb-title"></span> <span class="lb-pos" dir="ltr"></span></p>
@@ -873,6 +887,6 @@
   </div>
 </dialog>
 
-<script src="script.js?v=20261101-video-fix"></script>
+<script src="script.js?v=20261101-player"></script>
 </body>
 </html>

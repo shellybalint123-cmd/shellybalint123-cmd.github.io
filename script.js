@@ -101,24 +101,79 @@
     });
   });
 
-  /* ---------- Lightbox (one video at a time, with sound) ---------- */
+  /* ---------- Lightbox: click to play, one video at a time, with sound ----------
+     Nothing plays by itself while scrolling. A tap opens the player and starts the video
+     with sound (the tap is the user gesture browsers require). The video plays once (no loop);
+     at the end a replay button appears. If a browser still blocks playback, a clear Play button
+     is shown instead of a stuck/black player. */
   var lb = $('#lightbox');
   var video = $('#lb-video');
+  var overlay = $('.lb-overlay', lb);
+  var overlayBtn = $('.lb-overlay-btn', lb);
+  var overlayMsg = $('.lb-overlay-msg', lb);
+  var spinner = $('.lb-spinner', lb);
+  var muteBtn = $('.lb-mute', lb);
+  var fullBtn = $('.lb-full', lb);
   var lbTitle = $('.lb-title', lb);
   var lbPos = $('.lb-pos', lb);
   var current = { list: [], index: 0, opener: null, title: '' };
+  var token = 0;              // invalidates late results when the viewer switches videos quickly
+  var overlayKind = 'play';   // 'play' | 'replay' | 'error'
+  var triedOriginal = false;
 
-  function setSource(i) {
+  video.loop = false;
+  video.playsInline = true;
+
+  function showOverlay(kind, msg) {
+    overlayKind = kind;
+    overlay.classList.toggle('is-replay', kind === 'replay');
+    overlayBtn.setAttribute('aria-label', kind === 'replay' ? 'הפעלה חוזרת' : kind === 'error' ? 'ניסיון חוזר' : 'הפעלה');
+    overlayMsg.textContent = msg || '';
+    overlay.hidden = false;
+    try { overlayBtn.focus({ preventScroll: true }); } catch (e) { /* ignore */ }
+  }
+  function hideOverlay() { overlay.hidden = true; overlayMsg.textContent = ''; }
+  function setLoading(on) { spinner.hidden = !on; }
+  function syncMute() {
+    var m = video.muted || video.volume === 0;
+    muteBtn.setAttribute('aria-pressed', String(m));
+    muteBtn.setAttribute('aria-label', m ? 'ביטול השתקה' : 'השתקה');
+  }
+
+  function attemptPlay(my) {
+    var p;
+    try { p = video.play(); } catch (e) { p = null; }
+    if (!p || typeof p.then !== 'function') return;
+    p.then(function () {
+      if (my === token) hideOverlay();
+    }, function (err) {
+      if (my !== token) return;                          // a newer video took over
+      if (err && err.name === 'AbortError') return;      // interrupted by a new load
+      if (video.error) return;                           // the error handler will explain
+      setLoading(false);
+      showOverlay('play', 'לחצו להפעלה');                // browser blocked playback with sound
+    });
+  }
+
+  function loadItem(i) {
     var btn = current.list[i];
+    if (!btn) return;
+    var my = ++token;
+    triedOriginal = false;
     current.index = i;
+    video.pause();
+    hideOverlay();
+    setLoading(true);
     if (btn.getAttribute('data-title')) lbTitle.textContent = btn.getAttribute('data-title');
-    var wide = btn.getAttribute('data-ratio') === '16 / 9';
-    lb.classList.toggle('is-wide', wide);
+    lbPos.textContent = (i + 1) + ' / ' + current.list.length;
+    lb.classList.toggle('is-wide', btn.getAttribute('data-ratio') === '16 / 9');
+    video.loop = false;
+    video.muted = false;                                 // every video starts with sound
     video.poster = btn.getAttribute('data-thumb') || '';
     video.src = btn.getAttribute('data-video');
-    lbPos.textContent = (i + 1) + ' / ' + current.list.length;
-    var p = video.play();
-    if (p && p.catch) p.catch(function () { /* the viewer can press play */ });
+    video.load();
+    syncMute();
+    attemptPlay(my);
   }
 
   function openLightbox(btn) {
@@ -129,26 +184,86 @@
     current.opener = btn;
     current.title = panel ? $('h3', panel).textContent : (btn.getAttribute('data-title') || 'עבודות נבחרות');
     lbTitle.textContent = current.title;
+    fullBtn.hidden = !(video.requestFullscreen || video.webkitRequestFullscreen || video.webkitEnterFullscreen);
     if (typeof lb.showModal === 'function') lb.showModal(); else lb.setAttribute('open', '');
     doc.documentElement.classList.add('lb-open');
-    setSource(current.list.indexOf(btn));
+    loadItem(current.list.indexOf(btn));                 // runs inside the tap, so sound is allowed
+    try { video.focus({ preventScroll: true }); } catch (e) { /* ignore */ }
+  }
+
+  function exitFullscreen() {
+    var fs = doc.fullscreenElement || doc.webkitFullscreenElement;
+    if (!fs) return;
+    var exit = doc.exitFullscreen || doc.webkitExitFullscreen;
+    if (exit) { try { var r = exit.call(doc); if (r && r.catch) r.catch(function () {}); } catch (e) { /* ignore */ } }
   }
 
   function closeLightbox() {
+    token++;
+    exitFullscreen();
     video.pause();
     video.removeAttribute('src');
+    video.removeAttribute('poster');
     video.load();
+    hideOverlay();
+    setLoading(false);
     doc.documentElement.classList.remove('lb-open');
     if (lb.open) { if (typeof lb.close === 'function') lb.close(); else lb.removeAttribute('open'); }
-    if (current.opener) current.opener.focus();
+    if (current.opener) { try { current.opener.focus(); } catch (e) { /* ignore */ } }
   }
 
   function step(d) {
     var n = current.list.length;
     if (n < 2) return;
-    setSource((current.index + d + n) % n);
+    loadItem((current.index + d + n) % n);               // pauses the old video, starts the new one with sound
   }
 
+  function toggleFullscreen() {
+    if (doc.fullscreenElement || doc.webkitFullscreenElement) { exitFullscreen(); return; }
+    var r;
+    if (video.requestFullscreen) r = video.requestFullscreen();
+    else if (video.webkitRequestFullscreen) video.webkitRequestFullscreen();
+    else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();   // iPhone
+    if (r && r.catch) r.catch(function () {});
+  }
+
+  // --- player events
+  video.addEventListener('playing', function () { hideOverlay(); setLoading(false); });
+  video.addEventListener('canplay', function () { setLoading(false); });
+  video.addEventListener('waiting', function () { if (!video.paused && !video.ended) setLoading(true); });
+  video.addEventListener('volumechange', syncMute);
+  video.addEventListener('ended', function () { setLoading(false); showOverlay('replay', ''); });
+  video.addEventListener('error', function () {
+    var src = video.getAttribute('src');
+    if (!src) return;                                    // we just cleared it on close
+    if (!triedOriginal && src.indexOf('/light/') !== -1) {
+      triedOriginal = true;                              // light copy failed: fall back to the original file
+      video.src = src.replace('/light/', '/');
+      video.load();
+      attemptPlay(token);
+      return;
+    }
+    setLoading(false);
+    showOverlay('error', 'הסרטון לא נטען. בדקו את החיבור ונסו שוב');
+  });
+
+  overlayBtn.addEventListener('click', function () {
+    if (overlayKind === 'error') { loadItem(current.index); return; }
+    if (overlayKind === 'replay') video.currentTime = 0;
+    hideOverlay();
+    attemptPlay(token);                                  // this tap is the gesture that allows sound
+  });
+
+  muteBtn.addEventListener('click', function () {
+    video.muted = !video.muted;
+    if (!video.muted && video.volume === 0) video.volume = 1;
+    syncMute();
+  });
+  fullBtn.addEventListener('click', toggleFullscreen);
+
+  doc.addEventListener('visibilitychange', function () { if (doc.hidden && lb.open) video.pause(); });
+
+  // --- opening / closing / navigation
   doc.addEventListener('click', function (e) {
     var card = e.target.closest('.vcard, .featured-card__play');
     if (card) openLightbox(card);
@@ -165,14 +280,24 @@
     if (e.key === 'ArrowLeft') { e.preventDefault(); step(1); }
     else if (e.key === 'ArrowRight') { e.preventDefault(); step(-1); }
   });
-  // swipe between videos on touch screens (video controls stay usable)
-  var touchX = null;
-  lb.addEventListener('touchstart', function (e) { touchX = e.changedTouches[0].clientX; }, { passive: true });
+
+  // swipe between videos on touch screens; gestures that start on the control bar
+  // (scrubbing the progress bar, volume) or on a button never switch videos
+  var touch = null;
+  lb.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) { touch = null; return; }
+    var t = e.changedTouches[0];
+    var r = video.getBoundingClientRect();
+    var onControls = e.target.closest('.lb-bar, .lb-tools, .lb-close, .lb-overlay-btn') ||
+      (e.target === video && t.clientY > r.bottom - 76);
+    touch = onControls ? null : { x: t.clientX, y: t.clientY };
+  }, { passive: true });
   lb.addEventListener('touchend', function (e) {
-    if (touchX === null) return;
-    var dx = e.changedTouches[0].clientX - touchX;
-    touchX = null;
-    if (Math.abs(dx) > 70 && !e.target.closest('.lb-bar')) step(dx < 0 ? 1 : -1);
+    if (!touch) return;
+    var t = e.changedTouches[0];
+    var dx = t.clientX - touch.x, dy = t.clientY - touch.y;
+    touch = null;
+    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx < 0 ? 1 : -1);
   }, { passive: true });
 
   /* ---------- Showreel slot: becomes a player when data-src is set ---------- */
