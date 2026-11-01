@@ -124,7 +124,8 @@
   function openLightbox(btn) {
     var panel = btn.closest('.project');
     var featured = btn.closest('.featured-grid');
-    current.list = panel ? $('.vcard', panel) : (featured ? $('.featured-card__play', featured) : [btn]);
+    var cards = panel ? panel.querySelectorAll('.vcard') : (featured ? featured.querySelectorAll('.featured-card__play') : [btn]);
+    current.list = Array.prototype.slice.call(cards);
     current.opener = btn;
     current.title = panel ? $('h3', panel).textContent : (btn.getAttribute('data-title') || 'עבודות נבחרות');
     lbTitle.textContent = current.title;
