@@ -456,7 +456,8 @@ ul, ol { list-style: none; }
 .lb-overlay-btn .i-replay { display: none; }
 .lb-overlay.is-replay .i-play { display: none; }
 .lb-overlay.is-replay .i-replay { display: block; }
-.lb-overlay-msg { margin: 0; padding: 0 20px; max-width: 28ch; text-align: center; font-size: 0.95rem; line-height: 1.5; color: #fff; }
+.lb-overlay-msg { margin: 0; padding: 9px 16px; max-width: 28ch; text-align: center; font-size: 0.95rem; line-height: 1.5; color: #fff; background: var(--navy); border-radius: var(--r); }
+.lb-overlay-msg:empty { display: none; }
 html.lb-open { overflow: hidden; }
 
 /* ---------- Reveal on scroll ---------- */
@@ -679,7 +680,7 @@ html.lb-open { overflow: hidden; }
 }
 .svc-desc { line-height: 1.85; }
 .about .sec-idx { font-size: .75rem; }
-.about .sec-idx span { color: var(--ink-3); }
+.about .sec-idx span { color: var(--ink-2); }
 .testimonials .sec-lead { max-width: 420px; }
 .quote blockquote { font-weight: 400; }
 .contact .sec-idx { margin-bottom: 30px; }

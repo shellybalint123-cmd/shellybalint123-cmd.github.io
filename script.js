@@ -132,7 +132,12 @@
     overlay.hidden = false;
     try { overlayBtn.focus({ preventScroll: true }); } catch (e) { /* ignore */ }
   }
-  function hideOverlay() { overlay.hidden = true; overlayMsg.textContent = ''; }
+  function hideOverlay() {
+    var hadFocus = overlay.contains(doc.activeElement);
+    overlay.hidden = true;
+    overlayMsg.textContent = '';
+    if (hadFocus) { try { video.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }   // keep keyboard navigation inside the player
+  }
   function setLoading(on) { spinner.hidden = !on; }
   function syncMute() {
     var m = video.muted || video.volume === 0;
