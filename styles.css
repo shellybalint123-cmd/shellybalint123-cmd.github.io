@@ -84,7 +84,7 @@ ul, ol { list-style: none; }
 [hidden] { display: none !important; }
 
 :focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
-.results :focus-visible, .contact :focus-visible, .site-footer :focus-visible, .lb :focus-visible, .showreel :focus-visible { outline-color: #fff; }
+.site-header :focus-visible, .results :focus-visible, .contact :focus-visible, .site-footer :focus-visible, .lb :focus-visible, .showreel :focus-visible { outline-color: #fff; }
 
 .container { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--pad); }
 
@@ -122,10 +122,10 @@ ul, ol { list-style: none; }
 
 /* ---------- Header ---------- */
 .site-header {
-  position: sticky; top: 0; z-index: 100; background: var(--cream); color: var(--ink);
+  position: sticky; top: 0; z-index: 100; background: var(--navy); color: var(--cream);
   padding-top: env(safe-area-inset-top); border-bottom: 1px solid transparent; transition: border-color 0.3s;
 }
-.site-header.is-scrolled { border-bottom-color: var(--line); }
+.site-header.is-scrolled { border-bottom-color: var(--d-line); }
 
 .header-bar { display: flex; align-items: center; gap: 28px; height: var(--header-h); }
 .logo { display: flex; flex: none; }
@@ -133,26 +133,27 @@ ul, ol { list-style: none; }
 
 .main-nav { display: flex; gap: clamp(18px, 2.6vw, 38px); margin-inline-start: auto; }
 .main-nav a {
-  position: relative; text-decoration: none; font-size: 0.95rem; font-weight: 500; color: var(--ink-2); padding: 6px 0; transition: color 0.25s;
+  position: relative; text-decoration: none; font-size: 0.95rem; font-weight: 500; color: rgba(245, 242, 233, 0.82); padding: 6px 0; transition: color 0.25s;
 }
 .main-nav a::after {
-  content: ""; position: absolute; inset-inline: 0; bottom: 0; height: 2px; background: var(--navy);
+  content: ""; position: absolute; inset-inline: 0; bottom: 0; height: 2px; background: var(--cream);
   transform: scaleX(0); transform-origin: right; transition: transform 0.4s var(--ease);
 }
-.main-nav a:hover, .main-nav a.is-active { color: var(--navy); }
+.main-nav a:hover, .main-nav a.is-active { color: var(--cream); }
 .main-nav a:hover::after, .main-nav a.is-active::after { transform: scaleX(1); }
 
 .header-cta {
   flex: none; display: inline-flex; align-items: center; height: 44px; padding: 0 22px; border-radius: var(--r);
-  background: var(--navy); color: #fff; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: background-color 0.3s;
+  background: var(--cream); color: var(--ink); border: 1px solid var(--warm); font-size: 0.9rem; font-weight: 500; text-decoration: none;
+  transition: background-color 0.3s, border-color 0.3s;
 }
-.header-cta:hover { background: var(--ink); }
+.header-cta:hover { background: var(--warm); border-color: var(--warm); }
 
 .nav-toggle {
   display: none; flex-direction: column; justify-content: center; align-items: center; gap: 7px;
   width: 44px; height: 44px; margin-inline-end: -10px; background: none; border: 0; cursor: pointer;
 }
-.nav-toggle span { width: 22px; height: 1.5px; background: var(--navy); transition: transform 0.3s var(--ease); }
+.nav-toggle span { width: 22px; height: 1.5px; background: var(--cream); transition: transform 0.3s var(--ease); }
 .nav-toggle[aria-expanded="true"] span:first-child { transform: translateY(4.25px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span:last-child { transform: translateY(-4.25px) rotate(-45deg); }
 
@@ -481,11 +482,11 @@ html.lb-open { overflow: hidden; }
   .header-cta { margin-inline-start: auto; }
   .main-nav {
     position: absolute; top: 100%; inset-inline: 0; margin: 0; flex-direction: column; gap: 0;
-    padding: 6px var(--pad) 24px; background: var(--cream); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 6px var(--pad) 24px; background: var(--navy); border-top: 1px solid var(--d-line); border-bottom: 1px solid var(--d-line);
     opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0.3s;
   }
   .main-nav.open { opacity: 1; visibility: visible; transform: none; }
-  .main-nav a { padding: 16px 0; font-size: 1.3rem; border-bottom: 1px solid var(--line); color: var(--ink); }
+  .main-nav a { padding: 16px 0; font-size: 1.3rem; border-bottom: 1px solid var(--d-line); color: var(--cream); }
   .main-nav a::after { display: none; }
 }
 
