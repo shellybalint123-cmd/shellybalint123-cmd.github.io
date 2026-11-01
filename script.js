@@ -111,6 +111,7 @@
   function setSource(i) {
     var btn = current.list[i];
     current.index = i;
+    if (btn.getAttribute('data-title')) lbTitle.textContent = btn.getAttribute('data-title');
     var wide = btn.getAttribute('data-ratio') === '16 / 9';
     lb.classList.toggle('is-wide', wide);
     video.poster = btn.getAttribute('data-thumb') || '';
@@ -122,9 +123,10 @@
 
   function openLightbox(btn) {
     var panel = btn.closest('.project');
-    current.list = $$('.vcard', panel);
+    var featured = btn.closest('.featured-grid');
+    current.list = panel ? $('.vcard', panel) : (featured ? $('.featured-card__play', featured) : [btn]);
     current.opener = btn;
-    current.title = $('h3', panel).textContent;
+    current.title = panel ? $('h3', panel).textContent : (btn.getAttribute('data-title') || 'עבודות נבחרות');
     lbTitle.textContent = current.title;
     if (typeof lb.showModal === 'function') lb.showModal(); else lb.setAttribute('open', '');
     doc.documentElement.classList.add('lb-open');
@@ -147,7 +149,7 @@
   }
 
   doc.addEventListener('click', function (e) {
-    var card = e.target.closest('.vcard');
+    var card = e.target.closest('.vcard, .featured-card__play');
     if (card) openLightbox(card);
   });
   $('.lb-close', lb).addEventListener('click', closeLightbox);
